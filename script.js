@@ -1,3 +1,14 @@
+// youtube try version
+// grabbing elements from the HTML
+const output = document.querySelector(".output");
+const result = document.querySelector(".result");
+const keys = document.querySelectorAll("button");
+
+let opArray = []
+
+
+
+
 // creating the functions for the different kinds of operations used in the calc
 function add(a,b) {
     return (a + b)  
@@ -35,84 +46,116 @@ function operate(a,b,operation) {
 };
 
 
-// when button clicked it is stored within a variable and will populate within the display class
 
 
-// TO DO: add each number to the display when you click each button dependent on the content within the class
+//create an event listener for click of buttons
+keys.forEach(key => {
+    key.addEventListener("click", calculate);
+})
 
-//append the element to this display class when you do it
 
 
+function calculate(){
+    
+    // this is a variable that will store the inner text from the button press
+    let buttonText = this.innerText;
+    let opInArray = false;
 
-// try #1, this does not give me shit but does return the element i need in console
-let display = document.querySelector('display');
-
-/*
-buttons.map( button => {
-    button.addEventListener('click', (e) => {
-       display.innerText = e.target.innerText;
-
-    });
-});
-*/
-
-//try #2
-/*
-if (document.addEventListener) {
-    document.addEventListener("click", handleClick, false);
-}
-else if (document.attachEvent) {
-    document.attachEvent("onclick", handleClick);
-}
-
-function handleClick(event) {
-    event = event || window.event;
-    event.target = event.target || event.srcElement;
-
-    var element = event.target;
-
-    // Climb up the document tree from the target of the event
-    while (element) {
-        if (element.nodeName === "BUTTON" && /button/.test(element.className)) {
-            // The user clicked on a <button> or clicked on an element inside a <button>
-            // with a class name called "foo"
-            todisplay(element);
-            break;
-        }
-
-        element = element.parentNode;
+    // if AC is clicked, everything is cleared
+    if (buttonText === "AC"){
+        output.innerText = ""
+        result.innerText = "";
+        opArray = [];
     }
-}
-
-function todisplay(button) {
-
-    // create a div to add a number to
-    let number = document.createElement("div");
-
-    //select the button content
-    let numberVal = document.querySelector('.button');
-    number.textContent = numberVal.innerText;
     
 
-    //append button content to the display
-    console.log(numberVal)
-}
-*/
+    // logic for what can be in the array
+    // can not start with an operate
+    else if (opArray.length == 0 && (buttonText == '+' || buttonText == '−' || buttonText == '÷' || buttonText == '×' || buttonText == 'AC' || buttonText == '=')){
+        /*output.textContent += buttonText;
+        opArray.push(buttonText);
+        console.log(opArray);
+        console.log("is it happening in first array")
+        */
+    }  
+
+    // can not add an operator if one already exists
+    else if (buttonText == '+' | buttonText == '−' | buttonText == '÷' | buttonText == '×'){
+        // goes through array, if finds an operator in the array, will not add this operator to the array
+        for (let i = 0; i < opArray.length; i++){
+            if (opArray[i] === '+' | opArray[i] === '−' | opArray[i] === '÷' | opArray[i] === '×'){
+                opInArray = true;
+                break;
+            }
+        }
+        if (opInArray == false) {
+            output.textContent += buttonText;
+            opArray.push(buttonText);
+            console.log(opArray);
+            console.log("is it happening in second array ")
+
+        }
+    }
+    
+    else if (buttonText != '=') {
+        output.textContent += buttonText;
+        opArray.push(buttonText);
+        console.log(opArray);
+
+
+    }
+        
+    
+
+    
+
+    // if the array contains an operater, you can not add another operator to it
+    // cycle through the array and check if there is an r
+    // have bool that is opInArray that is false unless there is operator, 
+    // if OpInarray is true, return nothing
+
+
+    // lets you add a number
+    /*
+    else {
+        output.textContent += buttonText;
+        opArray.push(buttonText);
+        console.log(opArray);
+    }
+    */
+    
+    
+    
+
+    
+
+    // push button text to the array based on some scenarios
+    // button can either be an operator or a number press
+    // lets first see if we can add button presses to a display and also add them to an opArray
+    
+    
+    // if first press is an operator, do not display to output and do not add to any variables
+    // we know if the first press is an operator if the array is blank
+
+
+    // if first press is a number, we will append this number to the array
+
+    //if last value in the array is an operater, we can not add another operator to the arry
+
+    // now we need to find a way to store the variables from the array
+
+    // append the number to dummy string and add numbers to it if the button press is a number
+    // if the button press is an operator, we clear the dummy string and add the operator to the array
 
 
 
-// now I am going to try another way that does this on click
-//
-function storeVar(el) {
-
-    var amount = el.getAttribute('value'); 
-    let number = document.createElement("div");
-    number.textContent = el.value;
-    // OR: simply 
-    // var amount = el.value;
-    //display.appendChild(number)
    
-    console.log(document.getElementsByClassName('button').value); // javascript
+
     
-    //console.log(number)
-  } 
+   
+    
+    
+
+   
+
+}

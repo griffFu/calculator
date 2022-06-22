@@ -40,6 +40,9 @@ body{
     background-color:#d9ffea ;
 
 }
+.result{
+    display: flex;
+}
 
 .span-2{
     grid-column: span 2;
