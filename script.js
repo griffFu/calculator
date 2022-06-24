@@ -11,6 +11,7 @@ let opArray = []
 let firstArg = "";
 let secondArg = "";
 let calOperator = "";
+let firstArgFull = false;
 
 
 
@@ -35,20 +36,22 @@ function divide(a,b) {
 // creating a function that can take in two numbers and an operation and return a result
 // note that you will have to change this to be a return most likely for the JS w the dom to work
 function operate(a,b,operation) {
-    let result = 0
+    let calc = 0
     if (operation == '+'){
-        result = add(a,b)
+        calc = add(a,b)
     }
-    if (operation == '-'){
-        result = subtract(a,b)
+    if (operation == '−'){
+        calc = subtract(a,b)
     }
-    if (operation == '*'){
-        result = multiply(a,b)
+    if (operation == '×'){
+        calc = multiply(a,b)
     }
-    else if (operation == '/'){
-        result = divide(a,b)
+    else if (operation == '÷'){
+        calc = divide(a,b)
     }
-    console.log(result);
+    //console.log(result);
+    result.textContent += " = "
+    result.textContent += calc;
 };
 
 
@@ -67,11 +70,43 @@ function calculate(){
     let buttonText = this.innerText;
     let opInArray = false;
 
+    // if the user wants to operator
+    if (buttonText == "="){
+        // cycling through the array and adding values of firstArg, secondArg, and operator
+        //['3','3','+','8']
+        for (let i = 0; i < opArray.length; i++){
+            if (!(isNaN(opArray[i])) && firstArgFull === false){
+                firstArg += opArray[i]
+            }
+            else if(opArray[i] == '+' || opArray[i] == '−' || opArray[i] == '÷' || opArray[i] == '×'){
+                calOperator += opArray[i]
+                firstArgFull = true
+            }
+            else {
+                secondArg += opArray[i]
+            }  
+        }
+
+        firstArgInt = parseInt(firstArg)
+        secondArgInt = parseInt(secondArg)
+        operate(firstArgInt,secondArgInt,calOperator)
+        
+        // need to find a way to set this result to the first argument
+        //clear the second argument and the operator
+        // change the layout to match the top TOP version
+    }
+            
+    
+
     // if AC is clicked, everything is cleared
     if (buttonText === "AC"){
         output.innerText = ""
         result.innerText = "";
         opArray = [];
+        firstArg = "";
+        secondArg = "";
+        calOperator = "";
+        firstArgFull = false;
     }
     
 
@@ -96,7 +131,9 @@ function calculate(){
         }
         // if there is not an operator already in the array, then add the operator to it
         if (opInArray == false) {
+            output.textContent += " ";
             output.textContent += buttonText;
+            output.textContent += " ";
             opArray.push(buttonText);
             console.log(opArray);
         }
@@ -111,36 +148,5 @@ function calculate(){
 
 
     }
-        
-    
-  
-    // lets start off with an easy example where the array is [3,+,8]
-    // i might be able to put this function at the very top
-    // append
-    else if (buttonText == "="){
-        for (let i = 0; i < opArray.length; i++){
-            // append the values to this unless it is an operator
-            firstArg += opArray[i]
-            secondArg += opArray[i]
-            calOperator += opArray[i]
-    
-        }
-    }
-    
-    
-
-    
-    
-    
-
-
-   
-
-    
-   
-    
-    
-
-   
 
 }
