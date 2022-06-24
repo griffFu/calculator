@@ -4,7 +4,13 @@ const output = document.querySelector(".output");
 const result = document.querySelector(".result");
 const keys = document.querySelectorAll("button");
 
+// array for the storing of the number and the function
 let opArray = []
+
+//blank strings that will be appended with either the number or the operation
+let firstArg = "";
+let secondArg = "";
+let calOperator = "";
 
 
 
@@ -71,7 +77,7 @@ function calculate(){
 
     // logic for what can be in the array
     // can not start with an operate
-    else if (opArray.length == 0 && (buttonText == '+' || buttonText == '−' || buttonText == '÷' || buttonText == '×' || buttonText == 'AC' || buttonText == '=')){
+    else if (opArray.length == 0 && (buttonText == '+' || buttonText == '−' || buttonText == '÷' || buttonText == '×' || buttonText == 'AC')){
         /*output.textContent += buttonText;
         opArray.push(buttonText);
         console.log(opArray);
@@ -88,15 +94,16 @@ function calculate(){
                 break;
             }
         }
+        // if there is not an operator already in the array, then add the operator to it
         if (opInArray == false) {
             output.textContent += buttonText;
             opArray.push(buttonText);
             console.log(opArray);
-            console.log("is it happening in second array ")
-
         }
     }
     
+
+    // if the button pressed is a number only, then it will be added to the array no matter what
     else if (buttonText != '=') {
         output.textContent += buttonText;
         opArray.push(buttonText);
@@ -106,47 +113,25 @@ function calculate(){
     }
         
     
-
+  
+    // lets start off with an easy example where the array is [3,+,8]
+    // i might be able to put this function at the very top
+    // append
+    else if (buttonText == "="){
+        for (let i = 0; i < opArray.length; i++){
+            // append the values to this unless it is an operator
+            firstArg += opArray[i]
+            secondArg += opArray[i]
+            calOperator += opArray[i]
     
-
-    // if the array contains an operater, you can not add another operator to it
-    // cycle through the array and check if there is an r
-    // have bool that is opInArray that is false unless there is operator, 
-    // if OpInarray is true, return nothing
-
-
-    // lets you add a number
-    /*
-    else {
-        output.textContent += buttonText;
-        opArray.push(buttonText);
-        console.log(opArray);
+        }
     }
-    */
+    
+    
+
     
     
     
-
-    
-
-    // push button text to the array based on some scenarios
-    // button can either be an operator or a number press
-    // lets first see if we can add button presses to a display and also add them to an opArray
-    
-    
-    // if first press is an operator, do not display to output and do not add to any variables
-    // we know if the first press is an operator if the array is blank
-
-
-    // if first press is a number, we will append this number to the array
-
-    //if last value in the array is an operater, we can not add another operator to the arry
-
-    // now we need to find a way to store the variables from the array
-
-    // append the number to dummy string and add numbers to it if the button press is a number
-    // if the button press is an operator, we clear the dummy string and add the operator to the array
-
 
 
    
