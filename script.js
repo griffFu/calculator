@@ -91,6 +91,8 @@ function calculate(){
         firstArgFull = false;
         operatorExists = false;
         operationHappened = false;
+        firstArgDecimal = false;
+        secondArgDecimal = false;
     }
 
 
