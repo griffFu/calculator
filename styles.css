@@ -5,10 +5,11 @@
 
 body{
     padding-top: 30px;
+    background-image: url('adventureTime.jpg')
 }
 
 .grid-container{
-    
+    border-color: black;
     background-color: #63bda4;
     height: 600px;
     width: 400px;
@@ -33,15 +34,23 @@ body{
 
 .display{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     font-size: 80px;
     grid-column: 1 / -1;
     background-color:#d9ffea ;
 
 }
 .result{
-    display: flex;
+    font-size: 40px;
+    padding:10px;
+
+}
+
+.output{
+    font-size: 30px;
+    padding: 10px;
 }
 
 .span-2{
